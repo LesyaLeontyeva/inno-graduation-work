@@ -15,7 +15,7 @@ class LoginPage:
     def click_enter_auth(self) -> None:
         self.app.wd.find_element(*LoginLocators.ENTER_LOGIN_BUTTON).click()
 
-    def click_enter_sms(self):
+    def click_enter_sms(self) -> None:
         self.app.wd.find_element(*LoginLocators.ENTER_SMS_BUTTON).click()
 
     def auth(self, user_data: UserData) -> None:
