@@ -1,4 +1,5 @@
 from model.login import UserData
+from constants.login import Login
 
 
 def test_auth(app):
@@ -13,7 +14,7 @@ def test_auth(app):
     app.open_main_page()
     app.login.click_enter_auth()
     app.login.click_enter_sms()
-    assert app.login.find_overview_button() == 'ОБЗОР'
+    assert app.login.find_overview_button() == Login.SUCCESS
 
 
 def test_auth_negative_login(app):
@@ -29,9 +30,7 @@ def test_auth_negative_login(app):
     user_data = UserData(login='admin', password='demo')
     app.login.clear_login_field()
     app.login.auth(user_data)
-    assert app.login.find_error_alert() in (
-        'Неверные данные пользователя (осталось 2 попытки)',
-        'Неверные данные пользователя (осталась 1 попытка)', 'Неверные данные пользователя')
+    assert app.login.find_error_alert() in Login.ERROR_ALERTS
 
 
 def test_auth_negative_password(app):
@@ -46,9 +45,7 @@ def test_auth_negative_password(app):
     app.open_main_page()
     user_data = UserData(login='', password='wrong_password')
     app.login.auth(user_data)
-    assert app.login.find_error_alert() in (
-        'Неверные данные пользователя (осталось 2 попытки)',
-        'Неверные данные пользователя (осталась 1 попытка)', 'Неверные данные пользователя')
+    assert app.login.find_error_alert() in Login.ERROR_ALERTS
 
 
 def test_auth_empty_login(app):
@@ -64,9 +61,7 @@ def test_auth_empty_login(app):
     user_data = UserData(login=None, password='demo')
     app.login.clear_login_field()
     app.login.auth(user_data)
-    assert app.login.find_error_alert() in (
-        'Неверные данные пользователя (осталось 2 попытки)',
-        'Неверные данные пользователя (осталась 1 попытка)', 'Неверные данные пользователя')
+    assert app.login.find_error_alert() in Login.ERROR_ALERTS
 
 
 def test_auth_empty_password(app):
@@ -82,9 +77,7 @@ def test_auth_empty_password(app):
     user_data = UserData(login='', password=None)
     app.login.clear_password_field()
     app.login.auth(user_data)
-    assert app.login.find_error_alert() in (
-        'Неверные данные пользователя (осталось 2 попытки)',
-        'Неверные данные пользователя (осталась 1 попытка)', 'Неверные данные пользователя')
+    assert app.login.find_error_alert() in Login.ERROR_ALERTS
 
 
 def test_auth_empty_login_password(app):
@@ -100,6 +93,4 @@ def test_auth_empty_login_password(app):
     app.login.clear_login_field()
     app.login.clear_password_field()
     app.login.click_enter_auth()
-    assert app.login.find_error_alert() in (
-        'Неверные данные пользователя (осталось 2 попытки)',
-        'Неверные данные пользователя (осталась 1 попытка)', 'Неверные данные пользователя')
+    assert app.login.find_error_alert() in Login.ERROR_ALERTS
