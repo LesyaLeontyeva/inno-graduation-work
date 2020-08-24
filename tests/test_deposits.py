@@ -1,3 +1,6 @@
+from constants.deposits import Deposits
+
+
 def test_open_deposit(app):
     app.open_main_page()
     app.login.click_enter_auth()
@@ -9,4 +12,4 @@ def test_open_deposit(app):
     app.deposits.click_submit_button()
     app.deposits.check_conditions()
     app.deposits.click_on_confirm()
-    assert 1 == 1
+    assert Deposits.SUCCESS_ALERT in app.deposits.get_success_text()
