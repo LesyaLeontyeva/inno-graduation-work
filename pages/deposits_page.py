@@ -37,7 +37,7 @@ class DepositsPage:
         )
 
     def click_submit_button(self) -> Any:
-        time.sleep(3)  # попробуй сделать цикл try except
+        time.sleep(10)  # попробуй сделать цикл try except
         self.wait.until(EC.element_to_be_clickable(DepositsLocators.SUBMIT_BUTTON))
         return self.app.wd.find_element(*DepositsLocators.SUBMIT_BUTTON).click()
 
@@ -48,6 +48,10 @@ class DepositsPage:
         element = self.app.wd.find_element(*DepositsLocators.CONDITIONS_CHECKBOX)
         element.click()
 
+    def click_on_confirm_checkbox(self) -> Any:
+        self.wait.until(EC.element_to_be_clickable(DepositsLocators.TEST_PATH))
+        return self.app.wd.find_element(*DepositsLocators.TEST_PATH).click()
+
     def click_on_confirm(self) -> Any:
         self.wait.until(EC.element_to_be_clickable(DepositsLocators.CONFIRM_BUTTON))
         return self.app.wd.find_element(*DepositsLocators.CONFIRM_BUTTON).click()
@@ -57,3 +61,13 @@ class DepositsPage:
             EC.visibility_of_element_located(DepositsLocators.SUCCESS_ALERT)
         )
         return self.app.wd.find_element(*DepositsLocators.SUCCESS_ALERT).text
+
+    def click_on_option_button(self) -> Any:
+        self.wait.until(EC.element_to_be_clickable(DepositsLocators.CHOSEN_DEPOSIT))
+        return self.app.wd.find_element(*DepositsLocators.CHOSEN_DEPOSIT).click()
+
+    def close_deposit_button(self) -> Any:
+        self.wait.until(
+            EC.element_to_be_clickable(DepositsLocators.CLOSE_DEPOSIT_BUTTON)
+        )
+        return self.app.wd.find_element(*DepositsLocators.CLOSE_DEPOSIT_BUTTON).click()

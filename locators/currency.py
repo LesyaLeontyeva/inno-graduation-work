@@ -16,3 +16,7 @@ class CurrencyLocators:
     STOCK_EXCHANGE = (By.XPATH, "//a[@id='bankRateExtendedTab']")
     FRAME_XPATH = (By.XPATH, "//iframe[@class='full-page']")
     FRAME_CONFIRM = (By.XPATH, "//iframe[@id='confirmIframe97']")
+    ACCOUNT_SELECTOR = (By.NAME, "debitAccount")
+    ACCOUNT_POUND_OPTION = (By.ID, "debit_acc_simple_40817826154747273294")
+    ACCOUNT_RUB_OPTION = (By.ID, "debit_acc_simple_40817810154747260987")
+    ERROR_SIGN = (By.ID, "simple-widget-question")

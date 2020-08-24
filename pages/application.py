@@ -8,6 +8,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 from pages.auth_page import LoginPage
 from pages.cards_page import CardsPage
+from pages.credit_page import CreditPage
 from pages.currency_page import CurrencyPage
 from pages.deposits_page import DepositsPage
 from utils.logger import setup
@@ -28,6 +29,7 @@ class Application:
         self.currency = CurrencyPage(self)
         self.deposits = DepositsPage(self)
         self.cards = CardsPage(self)
+        self.credit = CreditPage(self)
 
     @allure.step("Открытие главное страницы")
     def open_main_page(self):
