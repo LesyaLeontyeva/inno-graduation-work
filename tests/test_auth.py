@@ -1,3 +1,4 @@
+"""Тесты на авторизацию."""
 import allure
 import pytest
 from pytest_testrail.plugin import testrail
@@ -8,10 +9,12 @@ from model.login import UserData
 
 @allure.suite("Тесты на авторизацию")
 class TestAuth:
+    """Класс тестов для раздела Карты."""
+
     @allure.title("Тест на успешную авторизацию")
     @allure.tag("позитивный кейс")
     @testrail("C3")
-    def test_auth(self, app):
+    def test_auth(self, app) -> None:
         """
         Шаги:
         1. Пользователь переходит на сайт
@@ -22,16 +25,14 @@ class TestAuth:
         5. Проверяем наличие кнопки "Обзор".
         """
         app.open_main_page()
-        # user_data = UserData(login="demo", password="demo")
-        # app.login.auth(user_data)
         app.login.click_enter_auth()
         app.login.click_enter_sms()
         assert app.login.find_overview_button() == Login.SUCCESS
 
-    @allure.title("Тест нанеуспешную авторизацию")
+    @allure.title("Пользователь вводит неверный логин")
     @allure.tag("негативный кейс")
     @testrail("C4")
-    def test_auth_negative_login(self, app):
+    def test_auth_negative_login(self, app) -> None:
         """
         Шаги:
         1. Пользователь переходит на сайт
@@ -46,7 +47,7 @@ class TestAuth:
         app.login.auth(user_data)
         assert app.login.find_error_alert() in Login.ERROR_ALERTS
 
-    @allure.title("Тест на неуспешную авторизацию")
+    @allure.title("Пользователь вводит неверный пароль")
     @allure.tag("негативный кейс")
     @testrail("C5")
     def test_auth_negative_password(self, app) -> None:
@@ -64,7 +65,7 @@ class TestAuth:
         app.login.auth(user_data)
         assert app.login.find_error_alert() in Login.ERROR_ALERTS
 
-    @allure.title("Тест на неуспешную авторизацию")
+    @allure.title("Пользоаватель вводит пустое значение в поле логин")
     @allure.tag("негативный кейс")
     @testrail("C6")
     def test_auth_empty_login(self, app) -> None:
@@ -82,7 +83,7 @@ class TestAuth:
         app.login.auth(user_data)
         assert app.login.find_error_alert() in Login.ERROR_ALERTS
 
-    @allure.title("Тест на неуспешную авторизацию")
+    @allure.title("Пользователь вводит пустое значение в поле пароль")
     @allure.tag("негативный кейс")
     @testrail("C7")
     def test_auth_empty_password(self, app) -> None:
@@ -100,7 +101,7 @@ class TestAuth:
         app.login.auth(user_data)
         assert app.login.find_error_alert() in Login.ERROR_ALERTS
 
-    @allure.title("Тест на неуспешную авторизацию")
+    @allure.title("Пользователь пытается войти с пустями полями логин и пароль")
     @allure.tag("негативный кейс")
     @testrail("C8")
     def test_auth_empty_login_password(self, app) -> None:
@@ -118,7 +119,7 @@ class TestAuth:
         app.login.click_enter_auth()
         assert app.login.find_error_alert() in Login.ERROR_ALERTS
 
-    @allure.title("Тест на неуспешную авторизацию")
+    @allure.title("Пользователь вводит невалидные данные в поле логин и пароль")
     @allure.tag("негативный кейс")
     @testrail("C8")
     @pytest.mark.parametrize(

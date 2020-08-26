@@ -1,9 +1,20 @@
+import logging
 import os
 
 import allure
 import pytest
 
 from pages.application import Application
+
+logger = logging.getLogger()
+
+
+@pytest.fixture(scope="session")
+def authorization(app):
+    app.open_main_page()
+    app.login.click_enter_auth()
+    app.login.click_enter_sms()
+    return app
 
 
 @pytest.fixture(scope="session")
@@ -32,7 +43,7 @@ def pytest_addoption(parser):
     ),
 
 
-@pytest.hookimpl(tryfirst=True, hookwrapper=True)  # аллюр
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     outcome = yield
     rep = outcome.get_result()
@@ -43,14 +54,12 @@ def pytest_runtest_makereport(item, call):
                 if "app" in item.fixturenames:
                     web_driver = item.funcargs["app"]
                 else:
-                    print("Fail to take screen-shot")  # добавить логгер вместо принта
+                    logger.error("Fail to take screen-shot")
                     return
             allure.attach(
-                web_driver.d.get_screenshot_as_png(),
+                web_driver.wd.get_screenshot_as_png(),
                 name="screenshot",
                 attachment_type=allure.attachment_type.PNG,
             )
         except Exception as e:
-            print(
-                "Fail to take screen-shot: {}".format(e)
-            )  # добавить логгер вместо принта
+            logger.error("Fail to take screen-shot: {}".format(e))

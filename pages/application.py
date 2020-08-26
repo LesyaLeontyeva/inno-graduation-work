@@ -19,6 +19,7 @@ logger = logging.getLogger()
 class Application:
     def __init__(self, base_url: str, headless):
         setup("INFO")
+        logger.setLevel("INFO")
         driver_path = ChromeDriverManager().install()
         options = Options()
         # if headless:

@@ -1,5 +1,8 @@
+"""Методы страницы Валюта."""
+
 from typing import Any
 
+import allure
 from selenium.common.exceptions import (
     NoSuchWindowException,
     ElementClickInterceptedException,
@@ -9,18 +12,28 @@ from selenium.common.exceptions import (
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
+import logging
+
 from locators.currency import CurrencyLocators
+
+logger = logging.getLogger()
 
 
 class CurrencyPage:
+    """Класс с функциями для работы с разделом Валюта."""
+
     def __init__(self, app):
         self.app = app
         self.wait = WebDriverWait(self.app.wd, 10)
 
+    @allure.step("Нажимает на кнопку Вклады")
     def click_on_currency_button(self):
+        logger.info("Нажимает на кнопку Вклады")
         return self.app.wd.find_element(*CurrencyLocators.CURRENCY_BUTTON).click()
 
+    @allure.step("Вводит сумму")
     def input_amount(self, amount: int) -> Any:
+        logger.info("Вводит сумму")
         self.wait.until(
             EC.frame_to_be_available_and_switch_to_it(CurrencyLocators.FRAME_XPATH)
         )
@@ -32,7 +45,9 @@ class CurrencyPage:
             element = self.app.wd.find_element(*CurrencyLocators.INPUT_AMOUNT)
             element.send_keys(amount)
 
+    @allure.step("Нажимает на кнопку Подтвердить")
     def click_on_submit_button_with_frame(self) -> Any:
+        logger.info("Нажимает на кнопку Подтвердить")
         self.wait.until(
             EC.frame_to_be_available_and_switch_to_it(CurrencyLocators.FRAME_XPATH)
         )
@@ -42,7 +57,9 @@ class CurrencyPage:
             self.wait.until(EC.element_to_be_clickable(CurrencyLocators.SUBMIT_BUTTON))
             return self.app.wd.find_element(*CurrencyLocators.SUBMIT_BUTTON).click()
 
+    @allure.step("Вводит смс код")
     def input_sms_code(self, code) -> None:
+        logger.info("Вводит смс код")
         self.wait.until(
             EC.frame_to_be_available_and_switch_to_it(CurrencyLocators.FRAME_CONFIRM)
         )
@@ -54,10 +71,14 @@ class CurrencyPage:
             element = self.app.wd.find_element(*CurrencyLocators.SMS_CODE_INPUT)
             element.send_keys(code)
 
+    @allure.step("Нажимает на кнопку Подтвердить")
     def click_on_confirm_button(self) -> Any:
+        logger.info("Нажимает на кнопку Подтвердить")
         return self.app.wd.find_element(*CurrencyLocators.SMS_CONFIRM_BUTTON).click()
 
+    @allure.step("Закрывает сообщение")
     def click_on_close_alert(self) -> Any:
+        logger.info("Закрывает сообщение")
         return self.app.wd.find_element(*CurrencyLocators.CLOSE_ALERT_BUTTON).click()
 
     def get_alert_text(self) -> str:
@@ -75,7 +96,9 @@ class CurrencyPage:
             )
             return self.app.wd.find_element(*CurrencyLocators.SUCCESS_ALERT).text
 
+    @allure.step("Выбирает фунтовый счет")
     def choose_pound_account(self) -> None:
+        logger.info("ЗВыбирает фунтовый счет")
         self.wait.until(
             EC.frame_to_be_available_and_switch_to_it(CurrencyLocators.FRAME_XPATH)
         )
@@ -83,7 +106,9 @@ class CurrencyPage:
         self.app.wd.find_element(*CurrencyLocators.ACCOUNT_SELECTOR).click()
         return self.app.wd.find_element(*CurrencyLocators.ACCOUNT_POUND_OPTION).click()
 
+    @allure.step("Выбирает рублевый счет")
     def choose_rub_account(self) -> None:
+        logger.info("Выбирает рублевый счет")
         self.wait.until(
             EC.frame_to_be_available_and_switch_to_it(CurrencyLocators.FRAME_XPATH)
         )
@@ -91,20 +116,19 @@ class CurrencyPage:
         self.app.wd.find_element(*CurrencyLocators.ACCOUNT_SELECTOR).click()
         return self.app.wd.find_element(*CurrencyLocators.ACCOUNT_RUB_OPTION).click()
 
+    @allure.step("Нажимает на кнопку Обменять")
     def click_on_exchange(self) -> Any:
+        logger.info("Нажимает на кнопку Обменять")
         return self.app.wd.find_element(*CurrencyLocators.STOCK_EXCHANGE).click()
 
-    # def switch(self):
-    #     iframe = self.app.wd.find_element(*CurrencyLocators.FRAME_XPATH)
-    #     self.app.wd.switch_to.frame(iframe)
-    #
-    # def switch_confirm(self):
-    #     self.app.wd.switch_to_frame('confirmIframe97')
-
+    @allure.step("Нажимает на кнопку Подтвердить")
     def click_on_submit_button_no_frame(self) -> Any:
+        logger.info("Нажимает на кнопку Подтвердить")
         self.wait.until(EC.element_to_be_clickable(CurrencyLocators.SUBMIT_BUTTON))
         return self.app.wd.find_element(*CurrencyLocators.SUBMIT_BUTTON).click()
 
+    @allure.step("Ищет знак вопроса с ошибкой на странице")
     def find_error_sign(self) -> bool:
+        logger.info("Ищет знак вопроса с ошибкой на странице")
         self.wait.until(EC.visibility_of_element_located(CurrencyLocators.ERROR_SIGN))
         return self.app.wd.find_element(*CurrencyLocators.ERROR_SIGN).is_displayed()
