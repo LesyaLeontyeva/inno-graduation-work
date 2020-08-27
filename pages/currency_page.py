@@ -9,6 +9,7 @@ from selenium.common.exceptions import (
     NoSuchElementException,
     StaleElementReferenceException,
     TimeoutException,
+    ElementNotInteractableException,
 )
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -49,12 +50,13 @@ class CurrencyPage:
             EC.frame_to_be_available_and_switch_to_it(CurrencyLocators.FRAME_XPATH)
         )
         try:
-            element = self.app.wd.find_element(*CurrencyLocators.INPUT_AMOUNT)
-            element.send_keys(amount)
-        except StaleElementReferenceException:
             self.wait.until(
                 EC.visibility_of_element_located(CurrencyLocators.INPUT_AMOUNT)
             )
+            element = self.app.wd.find_element(*CurrencyLocators.INPUT_AMOUNT)
+            element.send_keys(amount)
+        except (StaleElementReferenceException, ElementNotInteractableException):
+            self.wait.until(EC.element_to_be_clickable(CurrencyLocators.INPUT_AMOUNT))
             element = self.app.wd.find_element(*CurrencyLocators.INPUT_AMOUNT)
             element.send_keys(amount)
 
