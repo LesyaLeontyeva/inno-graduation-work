@@ -52,7 +52,9 @@ class CurrencyPage:
             element = self.app.wd.find_element(*CurrencyLocators.INPUT_AMOUNT)
             element.send_keys(amount)
         except StaleElementReferenceException:
-            self.wait.until(EC.element_to_be_clickable(CurrencyLocators.INPUT_AMOUNT))
+            self.wait.until(
+                EC.visibility_of_element_located(CurrencyLocators.INPUT_AMOUNT)
+            )
             element = self.app.wd.find_element(*CurrencyLocators.INPUT_AMOUNT)
             element.send_keys(amount)
 
@@ -116,7 +118,7 @@ class CurrencyPage:
         self.wait.until(EC.element_to_be_clickable(CurrencyLocators.ACCOUNT_SELECTOR))
         self.app.wd.find_element(*CurrencyLocators.ACCOUNT_SELECTOR).click()
         self.wait.until(
-            EC.element_to_be_clickable(CurrencyLocators.ACCOUNT_POUND_OPTION)
+            EC.visibility_of_element_located(CurrencyLocators.ACCOUNT_POUND_OPTION)
         )
         return self.app.wd.find_element(*CurrencyLocators.ACCOUNT_POUND_OPTION).click()
 
