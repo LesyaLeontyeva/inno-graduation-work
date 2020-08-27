@@ -30,6 +30,7 @@ class CurrencyPage:
     @allure.step("Нажимает на кнопку Валюта")
     def click_on_currency_button(self):
         logger.info("Нажимает на кнопку Валюта")
+        self.app.wd.switch_to.default_content()
         try:
             self.wait.until(
                 EC.element_to_be_clickable(CurrencyLocators.CURRENCY_BUTTON)

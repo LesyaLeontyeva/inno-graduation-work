@@ -25,6 +25,7 @@ class DepositsPage:
     @allure.step("Нажимает на кнопку Вклады")
     def click_on_deposit_button(self) -> Any:
         logger.info("Нажимает на кнопку Вклады")
+        self.app.wd.switch_to.default_content()
         try:
             self.wait.until(
                 EC.element_to_be_clickable(DepositsLocators.DEPOSITS_BUTTON)
