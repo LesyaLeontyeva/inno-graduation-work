@@ -9,11 +9,9 @@ class DepositsLocators:
     SUBMIT_BUTTON = (By.XPATH, "(//button[@class='btn btn-primary'])[2]")
     CONDITIONS_CHECKBOX = (By.NAME, "condition.newDepositConditions")
     CONFIRM_BUTTON = (By.XPATH, "//button[@id='confirm']")
-    TEST_PATH = (By.XPATH, "//span[@class='short-content']")
+    TEST_PATH = (By.XPATH, "//input[@name='condition.newDepositConditions']")
     SUCCESS_ALERT = (By.XPATH, "//div[@class='alert alert-success']")
-    # Кейс новый
     CHOSEN_DEPOSIT = (By.XPATH, "//button[@class='btn btn-mini dropdown-toggle']")
     CLOSE_DEPOSIT_BUTTON = (By.XPATH, "//ul[@class='dropdown-menu']//li//a")
     FRAME = (By.XPATH, "//iframe[@id='confirmation-frame']")
-    # затем конфирматион баттон
-    # ниде саксесс алерт
+    RATE = (By.ID, "interest-rate")

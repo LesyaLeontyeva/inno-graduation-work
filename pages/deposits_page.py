@@ -1,6 +1,5 @@
 """Методы страницы Вклады."""
 
-import time
 from typing import Any
 
 import allure
@@ -66,7 +65,9 @@ class DepositsPage:
     @allure.step("Нажимает на кнопку Подтвердить")
     def click_submit_button(self) -> Any:
         logger.info("Нажимает на кнопку Подтвердить")
-        time.sleep(10)  # попробуй сделать цикл try except
+        self.wait.until(
+            EC.text_to_be_present_in_element(DepositsLocators.RATE, "13.15%")
+        )
         self.wait.until(EC.element_to_be_clickable(DepositsLocators.SUBMIT_BUTTON))
         return self.app.wd.find_element(*DepositsLocators.SUBMIT_BUTTON).click()
 
