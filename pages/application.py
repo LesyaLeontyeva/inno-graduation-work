@@ -22,8 +22,8 @@ class Application:
         logger.setLevel("INFO")
         driver_path = ChromeDriverManager().install()
         options = Options()
-        # if headless:
-        #     options.add_argument("--headless")
+        if headless:
+            options.add_argument("--headless")
         self.wd = webdriver.Chrome(driver_path, options=options)
         self.base_url = base_url
         self.login = LoginPage(self)
