@@ -4,6 +4,7 @@ import time
 from typing import Any
 
 import allure
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -24,8 +25,16 @@ class DepositsPage:
     @allure.step("Нажимает на кнопку Вклады")
     def click_on_deposit_button(self) -> Any:
         logger.info("Нажимает на кнопку Вклады")
-        self.wait.until(EC.element_to_be_clickable(DepositsLocators.DEPOSITS_BUTTON))
-        return self.app.wd.find_element(*DepositsLocators.DEPOSITS_BUTTON).click()
+        try:
+            self.wait.until(
+                EC.element_to_be_clickable(DepositsLocators.DEPOSITS_BUTTON)
+            )
+            return self.app.wd.find_element(*DepositsLocators.DEPOSITS_BUTTON).click()
+        except TimeoutException:
+            self.wait.until(
+                EC.element_to_be_clickable(DepositsLocators.DEPOSITS_BUTTON)
+            )
+            return self.app.wd.find_element(*DepositsLocators.DEPOSITS_BUTTON).click()
 
     @allure.step("Нажимает на кнопку Открыть вклад")
     def click_on_open_deposit(self) -> Any:

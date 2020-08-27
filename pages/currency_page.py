@@ -8,6 +8,7 @@ from selenium.common.exceptions import (
     ElementClickInterceptedException,
     NoSuchElementException,
     StaleElementReferenceException,
+    TimeoutException,
 )
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -29,8 +30,16 @@ class CurrencyPage:
     @allure.step("Нажимает на кнопку Валюта")
     def click_on_currency_button(self):
         logger.info("Нажимает на кнопку Валюта")
-        self.wait.until(EC.element_to_be_clickable(CurrencyLocators.CURRENCY_BUTTON))
-        return self.app.wd.find_element(*CurrencyLocators.CURRENCY_BUTTON).click()
+        try:
+            self.wait.until(
+                EC.element_to_be_clickable(CurrencyLocators.CURRENCY_BUTTON)
+            )
+            return self.app.wd.find_element(*CurrencyLocators.CURRENCY_BUTTON).click()
+        except TimeoutException:
+            self.wait.until(
+                EC.element_to_be_clickable(CurrencyLocators.CURRENCY_BUTTON)
+            )
+            return self.app.wd.find_element(*CurrencyLocators.CURRENCY_BUTTON).click()
 
     @allure.step("Вводит сумму")
     def input_amount(self, amount: int) -> Any:
