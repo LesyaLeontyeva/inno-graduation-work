@@ -20,7 +20,7 @@ class DepositsPage:
 
     def __init__(self, app):
         self.app = app
-        self.wait = WebDriverWait(self.app.wd, 10)
+        self.wait = WebDriverWait(self.app.wd, 20)
 
     @allure.step("Нажимает на кнопку Вклады")
     def click_on_deposit_button(self) -> Any:

@@ -22,7 +22,7 @@ class CardsPage:
 
     def __init__(self, app):
         self.app = app
-        self.wait = WebDriverWait(self.app.wd, 10)
+        self.wait = WebDriverWait(self.app.wd, 20)
 
     @allure.step("Нажимает на кнопку Карты")
     def click_on_cards_button(self) -> Any:
