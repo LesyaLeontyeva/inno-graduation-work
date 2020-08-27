@@ -30,7 +30,7 @@ class TestCards:
         authorization.cards.choose_first_option()
         authorization.cards.order_chosen_card()
         authorization.cards.submit_order_card()
-        assert authorization.cards.find_success_alert() == Cards.SUCCESS_ALERT
+        assert authorization.cards.find_success_alert() in Cards.SUCCESS_ALERT
 
     @allure.title("Тест подключить смс оповещения к карте")
     @allure.tag("позитивный кейс")
