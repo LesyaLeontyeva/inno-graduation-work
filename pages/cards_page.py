@@ -85,8 +85,16 @@ class CardsPage:
         return self.app.wd.find_element(*CardsLocators.SUBMIT_BUTTON).click()
 
     def find_success_alert(self) -> str:
-        self.wait.until(EC.visibility_of_element_located(CardsLocators.SUCCESS_ALERT))
-        return self.app.wd.find_element(*CardsLocators.SUCCESS_ALERT).text
+        try:
+            self.wait.until(
+                EC.visibility_of_element_located(CardsLocators.SUCCESS_ALERT)
+            )
+            return self.app.wd.find_element(*CardsLocators.SUCCESS_ALERT).text
+        except NoSuchWindowException:
+            self.wait.until(
+                EC.visibility_of_element_located(CardsLocators.SUCCESS_ALERT)
+            )
+            return self.app.wd.find_element(*CardsLocators.SUCCESS_ALERT).text
 
     @allure.step("Нажимает на кнопку СМС уведомления")
     def sms_button(self) -> Any:
