@@ -9,3 +9,4 @@ install:
 
 script:
   - pytest
+  - LANGUAGE=ru_RU.UTF-8
