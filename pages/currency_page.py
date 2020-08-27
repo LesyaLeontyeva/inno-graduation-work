@@ -109,12 +109,15 @@ class CurrencyPage:
 
     @allure.step("Выбирает фунтовый счет")
     def choose_pound_account(self) -> None:
-        logger.info("ЗВыбирает фунтовый счет")
+        logger.info("Выбирает фунтовый счет")
         self.wait.until(
             EC.frame_to_be_available_and_switch_to_it(CurrencyLocators.FRAME_XPATH)
         )
         self.wait.until(EC.element_to_be_clickable(CurrencyLocators.ACCOUNT_SELECTOR))
         self.app.wd.find_element(*CurrencyLocators.ACCOUNT_SELECTOR).click()
+        self.wait.until(
+            EC.element_to_be_clickable(CurrencyLocators.ACCOUNT_POUND_OPTION)
+        )
         return self.app.wd.find_element(*CurrencyLocators.ACCOUNT_POUND_OPTION).click()
 
     @allure.step("Выбирает рублевый счет")
@@ -125,6 +128,7 @@ class CurrencyPage:
         )
         self.wait.until(EC.element_to_be_clickable(CurrencyLocators.ACCOUNT_SELECTOR))
         self.app.wd.find_element(*CurrencyLocators.ACCOUNT_SELECTOR).click()
+        self.wait.until(EC.element_to_be_clickable(CurrencyLocators.ACCOUNT_RUB_OPTION))
         return self.app.wd.find_element(*CurrencyLocators.ACCOUNT_RUB_OPTION).click()
 
     @allure.step("Нажимает на кнопку Обменять")
