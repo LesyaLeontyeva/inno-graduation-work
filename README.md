@@ -12,9 +12,7 @@ pip install virtualenv
 2) Затем нужно активировать окружение:
 virtualenv <env_name>
 <env_name>\Scripts\activate.bat
-3) Запустите pytest для запуска всех тестов(флаг --headless для режиме без GUI)
-pytest
-4) Для запуска конкретного теста из файла:
+3) Для запуска конкретного теста из файла:
     `pytest <filename>::<testclassname>::<testname>`
 
 # Pre-commit-hooks
