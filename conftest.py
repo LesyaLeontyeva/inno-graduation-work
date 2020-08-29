@@ -10,14 +10,6 @@ logger = logging.getLogger()
 
 
 @pytest.fixture(scope="session")
-def authorization(app):
-    app.open_main_page()
-    app.login.click_enter_auth()
-    app.login.click_enter_sms()
-    return app
-
-
-@pytest.fixture(scope="session")
 def app(request):
     base_url = request.config.getoption("--base-url")
     headless = request.config.getoption("--headless")
@@ -26,6 +18,14 @@ def app(request):
     fixture.wd.maximize_window()
     yield fixture
     fixture.wd.quit()
+
+
+@pytest.fixture(scope="session")
+def authorization(app):
+    app.open_main_page()
+    app.login.click_enter_auth()
+    app.login.click_enter_sms()
+    return app
 
 
 def pytest_addoption(parser):

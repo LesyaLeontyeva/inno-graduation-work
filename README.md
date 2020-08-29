@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/LesyaLeontyeva/inno-graduation-work.svg?branch=master)](https://travis-ci.org/github/LesyaLeontyeva/inno-graduation-work)
 
 # Выпускная работа на курсе Автоматизация тестирования
-Стек технологий: Selenium, Python, Pytest
+Стек технологий: Selenium WebDriver, Python, Pytest
 # Выбранный ресурс:
 URL https://idemo.bspb.ru/
 
@@ -41,4 +41,4 @@ scoop install allure
 После прохождения тестов сформируется папка allure_result в корневой директории проекта
 
 Для генерации отчета необходимо ввести команду в окне PowerShell
-allure serve ${path}\inno_graduation_work\allure_result
+allure serve ${path}\inno_graduation_work\tests\allure_result

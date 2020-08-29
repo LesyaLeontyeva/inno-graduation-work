@@ -9,18 +9,18 @@ from constants.deposits import Deposits
 class TestDeposit:
     @allure.title("Тест на успешное открытие вклада")
     @allure.tag("позитивный кейс")
-    @testrail("C20")
-    def test_open_deposit(self, app, authorization):
+    @testrail("C72")
+    def test_open_deposit(self, authorization):
         """
         1. Пользователь авторизовывается
         2. Кликает на кнопку Вклады
         3. Кликает на кнопку Открыть вклад
         4. Кликает на кнопку Открыть вклад для выбранного вклада из списка
         5. Пользоавтель вводит сумму
-        5. Кликает на кнопку Дальше
-        6. Ставит чекбокс с Соглашением
-        7. Кликает на кнопку Подтвердить
-        8. Видит сообщение о том, что вклад открыт
+        6. Кликает на кнопку Дальше
+        7. Ставит чекбокс с Соглашением
+        8. Кликает на кнопку Подтвердить
+        9. Видит сообщение о том, что вклад открыт
         """
         authorization.deposits.click_on_deposit_button()
         authorization.deposits.click_on_open_deposit()

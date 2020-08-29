@@ -13,7 +13,7 @@ class TestAuth:
 
     @allure.title("Тест на успешную авторизацию")
     @allure.tag("позитивный кейс")
-    @testrail("C3")
+    @testrail("C55")
     def test_auth(self, app) -> None:
         """
         Шаги:
@@ -31,7 +31,7 @@ class TestAuth:
 
     @allure.title("Пользователь вводит неверный логин")
     @allure.tag("негативный кейс")
-    @testrail("C4")
+    @testrail("C56")
     def test_auth_negative_login(self, app) -> None:
         """
         Шаги:
@@ -49,7 +49,7 @@ class TestAuth:
 
     @allure.title("Пользователь вводит неверный пароль")
     @allure.tag("негативный кейс")
-    @testrail("C5")
+    @testrail("C57")
     def test_auth_negative_password(self, app) -> None:
         """
         Шаги:
@@ -67,7 +67,7 @@ class TestAuth:
 
     @allure.title("Пользоаватель вводит пустое значение в поле логин")
     @allure.tag("негативный кейс")
-    @testrail("C6")
+    @testrail("C58")
     def test_auth_empty_login(self, app) -> None:
         """
         Шаги:
@@ -85,7 +85,7 @@ class TestAuth:
 
     @allure.title("Пользователь вводит пустое значение в поле пароль")
     @allure.tag("негативный кейс")
-    @testrail("C7")
+    @testrail("C59")
     def test_auth_empty_password(self, app) -> None:
         """
         Шаги:
@@ -103,7 +103,7 @@ class TestAuth:
 
     @allure.title("Пользователь пытается войти с пустями полями логин и пароль")
     @allure.tag("негативный кейс")
-    @testrail("C8")
+    @testrail("C60")
     def test_auth_empty_login_password(self, app) -> None:
         """
         Шаги:
@@ -121,7 +121,7 @@ class TestAuth:
 
     @allure.title("Пользователь вводит невалидные данные в поле логин и пароль")
     @allure.tag("негативный кейс")
-    @testrail("C8")
+    @testrail("C73")
     @pytest.mark.parametrize(
         "login, password", [("0980", "6787"), ("data", "&^%%%"), ("___", " 8787  ")]
     )

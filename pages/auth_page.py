@@ -1,5 +1,6 @@
 """Методы авторизации страницы."""
 import logging
+from typing import Any
 
 import allure
 from selenium.webdriver.remote.webelement import WebElement
@@ -62,13 +63,13 @@ class LoginPage:
         self.app.wd.find_element(*LoginLocators.PASSWORD_INPUT).clear()
 
     @allure.step("Вводит логин")
-    def input_username(self, username):
+    def input_username(self, username) -> Any:
         logger.info("Вводит логин")
         self.app.wd.find_element(*LoginLocators.LOGIN_INPUT).clear()
         return self.app.wd.find_element(*LoginLocators.LOGIN_INPUT).send_keys(username)
 
     @allure.step("Вводит пароль")
-    def input_pass(self, password):
+    def input_pass(self, password) -> Any:
         logger.info("Вводит пароль")
         self.app.wd.find_element(*LoginLocators.PASSWORD_INPUT).clear()
         return self.app.wd.find_element(*LoginLocators.PASSWORD_INPUT).send_keys(

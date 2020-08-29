@@ -9,8 +9,8 @@ from constants.cards import Cards
 class TestCards:
     @allure.title("Тест на успешный заказ карты")
     @allure.tag("позитивный кейс")
-    @testrail("C9")
-    def test_order_card(self, app, authorization):
+    @testrail("C61")
+    def test_order_card(self, authorization):
         """
         1. Открываем главную страницу
         2. Кликаем на кнопку "Войти" в окне авторизации
@@ -34,8 +34,8 @@ class TestCards:
 
     @allure.title("Тест подключить смс оповещения к карте")
     @allure.tag("позитивный кейс")
-    @testrail("C10")
-    def test_connect_sms(self, app, authorization):
+    @testrail("C62")
+    def test_connect_sms(self, authorization):
         """
         1. Открываем главную страницу
         2. Кликаем на кнопку "Войти" в окне авторизации
@@ -53,8 +53,8 @@ class TestCards:
 
     @allure.title("Тест отключить смс оповещения на карте")
     @allure.tag("позитивный кейс")
-    @testrail("C11")
-    def test_delete_sms_connect(self, app, authorization):
+    @testrail("C63")
+    def test_delete_sms_connect(self, authorization):
         """
            1. Открываем главную страницу
            2. Кликаем на кнопку "Войти" в окне авторизации
@@ -73,8 +73,8 @@ class TestCards:
 
     @allure.title("Тест подключить email оповещения к карте")
     @allure.tag("позитивный кейс")
-    @testrail("C12")
-    def test_connect_email(self, app, authorization):
+    @testrail("C64")
+    def test_connect_email(self, authorization):
         """
            1. Открываем главную страницу
            2. Кликаем на кнопку "Войти" в окне авторизации
@@ -83,7 +83,7 @@ class TestCards:
            5. Кликаем на кнопку "E-mail уведомления"
            6. Кликаем на радиобаттон "E-mail"
            7. Кликаем на кнопку "Подключить"
-           7. Кликаем на кнопку "Подтвердить"
+           8. Кликаем на кнопку "Подтвердить"
            """
         authorization.cards.click_on_cards_button()
         authorization.cards.click_on_email()
@@ -94,8 +94,8 @@ class TestCards:
 
     @allure.title("Тест подключить к карте оплату в интернете")
     @allure.tag("позитивный кейс")
-    @testrail("C13")
-    def test_connect_pay_in_internet(self, app, authorization):
+    @testrail("C65")
+    def test_connect_pay_in_internet(self, authorization):
         """
            1. Открываем главную страницу
            2. Кликаем на кнопку "Войти" в окне авторизации
@@ -107,4 +107,4 @@ class TestCards:
         authorization.cards.click_on_pay_in_internet_button()
         authorization.cards.click_on_email_connect()
         authorization.cards.submit()
-        assert authorization.cards.find_success_alert() == Cards.PAY_IN_INTERNET_ALERT
+        assert authorization.cards.find_success_alert() in Cards.PAY_IN_INTERNET_ALERT

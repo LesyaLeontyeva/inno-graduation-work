@@ -32,7 +32,7 @@ class DepositsPage:
             return self.app.wd.find_element(*DepositsLocators.DEPOSITS_BUTTON).click()
         except TimeoutException:
             self.wait.until(
-                EC.element_to_be_clickable(DepositsLocators.DEPOSITS_BUTTON)
+                EC.visibility_of_element_located(DepositsLocators.DEPOSITS_BUTTON)
             )
             return self.app.wd.find_element(*DepositsLocators.DEPOSITS_BUTTON).click()
 

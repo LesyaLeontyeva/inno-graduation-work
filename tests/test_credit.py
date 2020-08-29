@@ -9,8 +9,8 @@ from constants.credit import Credit
 class TestCredit:
     @allure.title("Тест на полное погашение кредита")
     @allure.tag("позитивный кейс")
-    @testrail("C14")
-    def test_close_credit(self, app, authorization):
+    @testrail("C66")
+    def test_close_credit(self, authorization):
         """
         1. Пользователь авторизуется
         2. Кликает на кноку "Кредиты"
@@ -31,8 +31,8 @@ class TestCredit:
 
     @allure.title("Тест на частичное погашение кредита")
     @allure.tag("позитивный кейс")
-    @testrail("C15")
-    def test_partial_close_credit(self, app, authorization):
+    @testrail("C67")
+    def test_partial_close_credit(self, authorization):
         """
          1. Пользователь авторизуется
          2. Кликает на кноку "Кредиты"
@@ -55,8 +55,8 @@ class TestCredit:
 
     @allure.title("Тест на получение кредитной истории")
     @allure.tag("позитивный кейс")
-    @testrail("C16")
-    def test_credit_history(self, app, authorization):
+    @testrail("C68")
+    def test_credit_history(self, authorization):
         """
          1. Пользователь авторизуется
          2. Кликает на кноку "Кредиты"

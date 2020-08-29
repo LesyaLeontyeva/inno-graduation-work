@@ -75,13 +75,15 @@ class CurrencyPage:
     @allure.step("Вводит смс код")
     def input_sms_code(self, code) -> None:
         logger.info("Вводит смс код")
-        self.wait.until(
-            EC.frame_to_be_available_and_switch_to_it(CurrencyLocators.FRAME_CONFIRM)
-        )
         try:
+            self.wait.until(
+                EC.frame_to_be_available_and_switch_to_it(
+                    CurrencyLocators.FRAME_CONFIRM
+                )
+            )
             element = self.app.wd.find_element(*CurrencyLocators.SMS_CODE_INPUT)
             element.send_keys(code)
-        except NoSuchWindowException:
+        except (NoSuchWindowException, TimeoutException):
             self.wait.until(EC.element_to_be_clickable(CurrencyLocators.SMS_CODE_INPUT))
             element = self.app.wd.find_element(*CurrencyLocators.SMS_CODE_INPUT)
             element.send_keys(code)
@@ -97,15 +99,16 @@ class CurrencyPage:
         return self.app.wd.find_element(*CurrencyLocators.CLOSE_ALERT_BUTTON).click()
 
     def get_alert_text(self) -> str:
-        self.wait.until(
-            EC.frame_to_be_available_and_switch_to_it(CurrencyLocators.FRAME_XPATH)
-        )
+
         try:
+            self.wait.until(
+                EC.frame_to_be_available_and_switch_to_it(CurrencyLocators.FRAME_XPATH)
+            )
             self.wait.until(
                 EC.visibility_of_element_located(CurrencyLocators.SUCCESS_ALERT)
             )
             return self.app.wd.find_element(*CurrencyLocators.SUCCESS_ALERT).text
-        except NoSuchElementException:
+        except (NoSuchElementException, NoSuchWindowException):
             self.wait.until(
                 EC.visibility_of_element_located(CurrencyLocators.SUCCESS_ALERT)
             )
